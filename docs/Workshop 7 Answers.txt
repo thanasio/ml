@@ -1,0 +1,91 @@
+1.1. Change the number of hidden neurons to 100 from 30 and explain the results in terms of accuracy and processing time.
+Run the code with 30 and 100 neurons as a middle layer on ws6 code (backpropagation):
+30: 111 seconds, accuracy 0.9536
+100: 178 seconds, accuracy 0.917
+
+I was expecting the processing time to be higher, due to the number of additional calulations added, when the network grows, with the middle layer expanding to 100 neurons.
+In regards to accuracy, i am unsure why it took such as big drop. It possibly is due to overfitting.
+1.2. Compare your results with the student sitting next to you and explain your results are different?
+Due to covid19, that was impossible
+1.3. Change the learning rate to 0.1 and explain the results.
+ 
+100: 160 seconds, accuracy 0.9722
+30: 111 seconds, accuracy 0.9705
+
+It looks like smaller weight changes improves accuracy for boh architectures
+Task1
+(network structure and learning rate)
+1.4. Set the learning rate to 1 and epochs to 10, observe the behaviour and suggest possible changes to the hyper-parameters.
+
+30 neurons | eta=1 | 10 epochs: 160 seconds, accuracy 0.898
+30 neurons | eta=0.1 | 10 epochs: 160 seconds, accuracy 0.965
+
+100 neurons | eta=1 | 10 epochs: 294 seconds, accuracy 0.8926
+100 neurons | eta=0.1 | 10 epochs: 196 seconds, accuracy 0.9786
+
+it is evident from the above experiments that learning rate of 1 is too coarse and hurts efficiency. It makes sense as it would result into big weight changes.
+
+1.5. Keep increasing the learning rate up to 3 and observe the network behaviour.
+30 neurons | eta=2 | 10 epochs: 160 seconds, accuracy 0.832
+30 neurons | eta=3 | 10 epochs: 160 seconds, accuracy 0.832
+
+
+Increasing the learning rate decreases the accuracy as expected.
+1.6. Now, increase the learning rate to 100. Observe and explain the behaviour 
+
+#run 5x each experiment and take the average
+
+30 neurons | eta=5 | 10 epochs: 160 seconds, accuracy 0.832
+30 neurons | eta=25 | 10 epochs: 160 seconds, accuracy 0.822
+30 neurons | eta=50 | 10 epochs: 160 seconds, accuracy 0.820
+30 neurons | eta=75 | 10 epochs: 160 seconds, accuracy 0.813
+30 neurons | eta=100 | 10 epochs: 160 seconds, accuracy 0.826
+
+Task2
+(Cost function )
+•	Download networ2.py 
+•	Download cross_entropy_cost_function.py
+2.1.	Observe and explain the improvement in accuracy as compared to network1.py (Quadratic function)
+Quadratic 0.66
+cross entropy 0.96
+
+much better, however, not sure if that is only due to addressing the learning slow down of the sigmoid quadratic function. The math for the one before last layer de;ta is different too.
+
+2.2.	Observe the network behaviour, why there is a fluctuation in learning?
+
+if we run it for 30 epochs, there is a fluctuation caused from overfitting/overtraining the data after the 10th epoch.
+
+2.3.	How could we address the fluctuation to stabilise the network?
+(Regularization)
+•	Download overfitting.py
+•	Create a new text file in the same directory name it, 
+‘overfitting_regularizaiton_results’ • Run the code
+•	Enter:
+1.	Text file path
+2.	Training cost (x-axis range) = 0
+3.	Training accuracy (x-axis range) = 0
+4.	Test cost (x-axis range) = 0
+5.	Test accuracy (x-axis range) = 0
+6.	Training set size = 100
+7.	Regularization parameter = 0.05
+ 
+(Regularization)
+•	net = network2.Network([784, 30, 10], cost=network2.CrossEntropyCost())
+•	net.large_weight_initializer()
+•	test_cost, test_accuracy, training_cost, training_accuracy \
+= net.SGD(training_data[:training_set_size], num_epochs, 10, 0.5, evaluation_data=test_data)
+(Regularization)
+Let's see how regularization changes the performance of our neural network. We'll use a network with 30 hidden neurons, a mini-batch size of 10, a learning rate of 0.5, and the crossentropy cost function. Use regularization parameter:
+-	lmbda=0.0
+-	lmbda=0.1
+-	lmbda=0.5
+3.1. Explain the differences in results for different values of lmbda
+
+I have experimentated with 3 different lmbda values: 0.5, 0.05 and 5. Trained the ANN for 50 epochs
+
+For lmbda = 5 training was done by 10 epochs and the costfunction converges into a value close to 2.0 Possibly some overfitting there until epoch 50.
+For lmbda = 0.5 things were better because the costfunction kept improving up unitl epoch 50 into a value of just below 1. 
+for lmbda = 0.05 similarly the costfunction kept improving up until epoch 50 into value appox 0.6. 
+
+It is clear that the third option with lmbda 0.05 would be the prefered one as it was minimising the costfunction better and also had better results on the test set. 
+
