@@ -9,6 +9,9 @@ from sklearn.preprocessing import normalize
 from sklearn import datasets
 
 
+# pre-processing: L2 normalization normalizes values between 0.0-1.0
+# creation of b vector, adds bias to the theta_x
+
 def h(Theta, X):
     thetax = np.matmul(Theta.T, X)
     return 1/(1+np.exp(-thetax))
@@ -50,6 +53,21 @@ theta_best =theta
 # calculate predictions
 y_predict =h(theta, X_b1)
 
+y_pred = y_predict.ravel()
+y2 = y.ravel()
+
+plt.plot(y_pred, label = "predicted")
+
+plt.plot(y2, label = "actual")
+plt.xlabel('x - axis')
+# Set the y axis label of the current axis.
+plt.ylabel('y - axis')
+# Set a title of the current axes.
+plt.title('predicted vs actual')
+# show a legend on the plot
+plt.legend()
+# Display a figure.
+plt.savefig('task_4_1.png')
 #generate predictions out of probabilities
 for i in range(y_predict.shape[0]):
     for j in range(y_predict.shape[1]):

@@ -108,6 +108,23 @@ A_1 = sigmoid(Z_1)
 Z_2 = W_2.dot(A_1) + b_2
 A_2 = sigmoid(Z_2)
 
+y_plot = y.T
+for i in range(10):
+
+    plt.plot(A_2[i], label="predicted")
+
+    plt.plot(y_plot[i], label="actual")
+    plt.xlabel('x - axis')
+    # Set the y axis label of the current axis.
+    plt.ylabel('y - axis')
+    # Set a title of the current axes.
+    plt.title('predicted vs actual: class ' + str(i))
+    # show a legend on the plot
+    plt.legend()
+    # Display a figure.
+    plt.savefig('task_6_1_'+str(i)+'.png')
+    plt.close()
+
 for i in range(A_2.shape[0]):
     for j in range(A_2.shape[1]):
 

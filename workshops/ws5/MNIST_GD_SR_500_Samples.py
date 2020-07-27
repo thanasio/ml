@@ -71,6 +71,25 @@ for iteration in range(n_iterations):
 
 y_predict = np.array([h(theta[i], np.array(x_t)) for i in range(10)])
 
+
+
+y_plot = y.T
+for i in range(10):
+
+    plt.plot(y_predict[i], label="predicted")
+
+    plt.plot(y_plot[i], label="actual")
+    plt.xlabel('x - axis')
+    # Set the y axis label of the current axis.
+    plt.ylabel('y - axis')
+    # Set a title of the current axes.
+    plt.title('predicted vs actual: class ' + str(i))
+    # show a legend on the plot
+    plt.legend()
+    # Display a figure.
+    plt.savefig('task_5_1_'+str(i)+'.png')
+    plt.close()
+
 for i in range(y_predict.shape[0]):
     for j in range(y_predict.shape[1]):
 
